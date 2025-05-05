@@ -577,20 +577,20 @@ body.dark-theme #reminder-toggle:hover {
     background-color: #ffa726; /* Darker lighter orange */
 }
 
-body.dark-theme #motivation-toggle { /* Style new toggle */
-    background-color: #f06292; /* Lighter pink */
+#motivation-toggle { /* Style new toggle */
+    background-color: #e91e63; /* Pink */
 }
 
-body.dark-theme #motivation-toggle:hover {
-    background-color: #ec407a; /* Darker lighter pink */
+#motivation-toggle:hover {
+    background-color: #c2185b; /* Darker pink */
 }
 
-body.dark-theme #category-motivation-toggle { /* Style new toggle */
-    background-color: #9575cd; /* Lighter Deep Purple */
+#category-motivation-toggle { /* Style new toggle */
+    background-color: #673ab7; /* Deep Purple */
 }
 
-body.dark-theme #category-motivation-toggle:hover {
-    background-color: #7e57c2; /* Darker Lighter Deep Purple */
+#category-motivation-toggle:hover {
+    background-color: #512da8; /* Darker Deep Purple */
 }
 
 
@@ -975,4 +975,27 @@ body.dark-theme #current-task-motivation {
 body.dark-theme #category-motivation-display {
     background-color: #424242;
     color: #eee;
-    box-shadow: 0 2
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+#category-motivation-display h2 {
+    color: #673ab7; /* Deep Purple heading */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+body.dark-theme #category-motivation-display h2 {
+    color: #9575cd; /* Lighter Deep Purple */
+}
+
+#current-category-motivation {
+    font-size: 1.1em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #555;
+}
+
+body.dark-theme #current-category-motivation {
+    color: #bbb;
+}
