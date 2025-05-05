@@ -18,18 +18,25 @@
     }
 
     const authModal = document.getElementById('auth-modal');
+    const logoutBtn = document.getElementById('logout-btn'); // Get the logout button
     const categoryTitle = document.getElementById('category-title');
     const taskList = document.getElementById('task-list');
     const searchBar = document.getElementById('search-bar');
     const reminderScheduleElement = document.getElementById('reminder-schedule');
     const motivationCard = document.getElementById('motivation-card');
-    const motivationBack = motivationCard.querySelector('.back'); // Only need the back for custom message
+    const motivationBack = motivationCard.querySelector('.back');
 
     // New elements for task-specific motivation
     const motivationToggle = document.getElementById('motivation-toggle');
     const taskMotivationInput = document.getElementById('task-motivation-input');
     const taskMotivationDisplay = document.getElementById('task-motivation-display');
     const currentTaskMotivationElement = document.getElementById('current-task-motivation');
+
+     // New elements for category-specific motivation
+     const categoryMotivationToggle = document.getElementById('category-motivation-toggle');
+     const categoryMotivationInput = document.getElementById('category-motivation-input');
+     const categoryMotivationDisplay = document.getElementById('category-motivation-display');
+     const currentCategoryMotivationElement = document.getElementById('current-category-motivation');
 
 
     let currentCategory = "My Day";
@@ -39,8 +46,9 @@
     // Show the login modal if no user is logged in
     if (!currentUser) {
         authModal.style.display = 'flex';
+        logoutBtn.style.display = 'none'; // Hide logout if not logged in
     } else {
-        document.getElementById('logout-btn').style.display = 'block'; // Show the logout button if logged in
+        logoutBtn.style.display = 'block'; // Show the logout button if logged in
     }
 
     // Set the minimum date for reminders to today
@@ -57,7 +65,8 @@
 
         categoryTitle.textContent = category;
 
-        const userTasksForCategory = (tasks[currentUser] && tasks[currentUser][category]) ? tasks[currentUser][category] : [];
+        // Check if currentUser and tasks[currentUser] are defined before accessing category
+        const userTasksForCategory = (currentUser && tasks[currentUser] && tasks[currentUser][category]) ? tasks[currentUser][category] : [];
 
         const filteredTasks = userTasksForCategory.filter(task =>
             task.text.toLowerCase().includes(filter.toLowerCase())
@@ -75,6 +84,11 @@
             importanceCheckbox.setAttribute('aria-label', 'Mark task as important');
             importanceCheckbox.onclick = function (e) { // Use onclick here to prevent list item click
                 e.stopPropagation();
+                if (!currentUser) { // Prevent action if not logged in
+                    importanceCheckbox.checked = !importanceCheckbox.checked; // Revert checkbox state
+                    alert("Please log in to mark tasks as important.");
+                    return;
+                }
                 task.important = importanceCheckbox.checked;
 
                 if (task.important) {
@@ -111,6 +125,11 @@
             checkbox.setAttribute('aria-label', 'Mark task as completed');
             checkbox.onclick = function (e) { // Use onclick here to prevent list item click
                 e.stopPropagation();
+                 if (!currentUser) { // Prevent action if not logged in
+                     checkbox.checked = !checkbox.checked; // Revert checkbox state
+                     alert("Please log in to mark tasks as completed.");
+                     return;
+                 }
                 task.completed = checkbox.checked;
                 taskItem.classList.toggle('completed', task.completed);
                 saveTasks();
@@ -131,6 +150,10 @@
 
             reminderIcon.onclick = function (e) { // Use onclick here to prevent list item click
                 e.stopPropagation();
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to manage reminders.");
+                     return;
+                 }
                 // Populate reminder inputs with task details for editing
                 document.getElementById('task-reminder-date').value = task.reminderDate || '';
                 document.getElementById('task-reminder-time').value = task.reminderTime || '';
@@ -142,6 +165,10 @@
 
             // Click handler for the task list item to select it
             taskItem.onclick = function () {
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to select tasks.");
+                     return;
+                 }
                 // Deselect previous item
                 if (selectedTaskElement) {
                     selectedTaskElement.classList.remove('active');
@@ -160,13 +187,17 @@
             editBtn.setAttribute('aria-label', 'Edit task');
             editBtn.onclick = function (e) { // Use onclick here to prevent list item click
                 e.stopPropagation();
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to edit tasks.");
+                     return;
+                 }
                 const editedTaskText = prompt("Edit task:", task.text);
                 if (editedTaskText !== null && editedTaskText.trim() !== "") {
                     tasks[currentUser][category][index].text = editedTaskText.trim();
                     saveTasks();
                     renderTasks(category, filter);
                     renderReminderSchedule(); // Update schedule if task text changes
-                    // If the selected task was edited, update the motivation display
+                     // If the selected task was edited, update the motivation display
                      if (selectedTaskElement && selectedTaskElement.dataset.category === category && parseInt(selectedTaskElement.dataset.index) === index) {
                          displayTaskMotivation(tasks[currentUser][category][index]);
                      }
@@ -179,6 +210,10 @@
             removeBtn.setAttribute('aria-label', 'Remove task');
             removeBtn.onclick = function (e) { // Use onclick here to prevent list item click
                 e.stopPropagation();
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to remove tasks.");
+                     return;
+                 }
                 const taskToRemove = tasks[currentUser][category][index];
                 // Remove the task from the current category
                 tasks[currentUser][category].splice(index, 1);
@@ -208,6 +243,7 @@
          if (filteredTasks.length === 0) {
              clearTaskMotivationDisplay();
          }
+         displayCategoryMotivation(currentCategory); // Display category motivation when rendering tasks
     }
 
     function saveTasks() {
@@ -220,6 +256,10 @@
 
     document.querySelectorAll('.sidebar-item').forEach(item => {
         item.onclick = function () {
+             if (!currentUser) { // Prevent action if not logged in
+                 alert("Please log in to view categories.");
+                 return;
+             }
             renderTasks(item.dataset.category, searchBar.value);
             // No need to re-render schedule when changing task category view
         };
@@ -234,7 +274,7 @@
             localStorage.setItem('loggedUser', username);
             currentUser = username; // Update currentUser variable
             authModal.style.display = 'none';
-            document.getElementById('logout-btn').style.display = 'block'; // Show logout button
+            logoutBtn.style.display = 'block'; // Show logout button
             // Initialize tasks for the new user if they don't exist
              if (!tasks[currentUser]) {
                 tasks[currentUser] = {
@@ -254,6 +294,20 @@
             alert('Invalid username or password.');
         }
     };
+
+    // Logout functionality
+    logoutBtn.onclick = function() {
+        localStorage.removeItem('loggedUser');
+        currentUser = null;
+        tasks = JSON.parse(localStorage.getItem('tasks')) || {}; // Reload tasks (should be empty for logged out user)
+        renderTasks("My Day"); // Render with no tasks
+        renderReminderSchedule(); // Clear schedule display
+        clearTaskMotivationDisplay(); // Clear task motivation display
+        clearCategoryMotivationDisplay(); // Clear category motivation display
+        logoutBtn.style.display = 'none'; // Hide logout button
+        authModal.style.display = 'flex'; // Show login modal
+    };
+
 
     // Registration functionality
     document.getElementById('register-btn').onclick = function () {
@@ -316,6 +370,11 @@
 
     // Adding tasks
     document.getElementById('add-task').onclick = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to add tasks.");
+             return;
+         }
+
         const taskInput = document.getElementById('task-input');
         const reminderDate = document.getElementById('task-reminder-date').value;
         const reminderTime = document.getElementById('task-reminder-time').value;
@@ -327,10 +386,7 @@
             alert("Please enter a task.");
             return;
         }
-        if (!currentUser) {
-             alert("Please log in to add tasks.");
-             return;
-        }
+
 
          if (!tasks[currentUser]) {
             tasks[currentUser] = {
@@ -374,11 +430,20 @@
 
     // Search tasks
     searchBar.oninput = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             searchBar.value = ""; // Clear input if not logged in
+             alert("Please log in to search tasks.");
+             return;
+         }
         renderTasks(currentCategory, searchBar.value);
     };
 
     // Reminder settings toggle
     document.getElementById('reminder-toggle').onclick = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to manage reminders.");
+             return;
+         }
         const reminderSettings = document.getElementById('reminder-settings');
         reminderSettings.style.display = reminderSettings.style.display === 'none' ? 'flex' : 'none';
         document.getElementById('reminder-toggle').classList.toggle('active'); // Add active class for styling
@@ -386,6 +451,10 @@
 
     // Motivation input toggle (New)
     motivationToggle.onclick = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to add motivation.");
+             return;
+         }
         taskMotivationInput.style.display = taskMotivationInput.style.display === 'none' ? 'block' : 'none';
         motivationToggle.classList.toggle('active'); // Add active class for styling
         if (taskMotivationInput.style.display !== 'none' && selectedTaskElement) {
@@ -399,6 +468,21 @@
         }
     };
 
+     // Category Motivation input toggle (New)
+     categoryMotivationToggle.onclick = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to add category motivation.");
+             return;
+         }
+         categoryMotivationInput.style.display = categoryMotivationInput.style.display === 'none' ? 'block' : 'none';
+         categoryMotivationToggle.classList.toggle('active'); // Add active class for styling
+         if (categoryMotivationInput.style.display !== 'none') {
+             // Pre-fill the category motivation input
+             categoryMotivationInput.value = (tasks[currentUser] && tasks[currentUser][currentCategory] && tasks[currentUser][currentCategory].motivation) || '';
+         } else {
+             categoryMotivationInput.value = ''; // Clear input when hidden
+         }
+     };
 
     // Theme toggle
     const themeIcon = document.getElementById('theme-icon');
@@ -408,6 +492,10 @@
 
     // Color picker
     document.getElementById('color-picker').onclick = function () {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to change colors.");
+             return;
+         }
         const color = prompt("Enter a color name or hex code:", "#4CAF50");
         if (color) {
             document.body.style.backgroundColor = color;
@@ -422,6 +510,10 @@
 
     // Flipping general motivation card
     motivationCard.onclick = function (event) {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to interact with the motivation card.");
+             return;
+         }
          // Prevent flipping if the click is on an interactive element inside (though none exist on the front now)
          if (event.target === this || event.target.closest('.card-content')) {
             this.classList.toggle('flipped');
@@ -515,6 +607,10 @@
             rescheduleBtn.innerHTML = '<i class="fas fa-edit"></i>';
             rescheduleBtn.title = "Reschedule Reminder";
             rescheduleBtn.onclick = function() {
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to reschedule reminders.");
+                     return;
+                 }
                 // Prompt user for new date and time
                 const newDate = prompt("Enter new date (YYYY-MM-DD):", task.reminderDate || '');
                 if (newDate === null) return; // User cancelled
@@ -561,6 +657,10 @@
             removeReminderBtn.innerHTML = '<i class="fas fa-times-circle"></i>';
             removeReminderBtn.title = "Remove Reminder";
             removeReminderBtn.onclick = function() {
+                 if (!currentUser) { // Prevent action if not logged in
+                     alert("Please log in to remove reminders.");
+                     return;
+                 }
                  const confirmation = confirm("Remove reminder for this task?");
                  if (confirmation) {
                      const originalCategory = task.originalCategory;
@@ -604,6 +704,10 @@
 
     // Toggle schedule visibility
     document.getElementById('schedule-toggle').onclick = function() {
+         if (!currentUser) { // Prevent action if not logged in
+             alert("Please log in to view the reminder schedule.");
+             return;
+         }
         const schedule = document.getElementById('reminder-schedule');
         schedule.style.display = schedule.style.display === 'none' ? 'flex' : 'none'; // Use flex for column layout
         if (schedule.style.display !== 'none') {
@@ -636,11 +740,42 @@
         motivationToggle.classList.remove('active');
     }
 
+     // Function to display category-specific motivation (New)
+     function displayCategoryMotivation(category) {
+         categoryMotivationDisplay.style.display = 'block'; // Show the display section
+         const categoryData = tasks[currentUser] && tasks[currentUser][category];
+         if (categoryData && categoryData.motivation && categoryData.motivation.trim() !== "") {
+             currentCategoryMotivationElement.textContent = categoryData.motivation;
+         } else {
+             currentCategoryMotivationElement.textContent = `No motivation message set for the "${category}" category.`;
+         }
+         // Pre-fill the motivation input if it's visible
+         if (categoryMotivationInput.style.display !== 'none') {
+             categoryMotivationInput.value = (categoryData && categoryData.motivation) || '';
+         }
+     }
+
+     // Function to clear the category-specific motivation display (New)
+     function clearCategoryMotivationDisplay() {
+         categoryMotivationDisplay.style.display = 'none';
+         currentCategoryMotivationElement.textContent = "Select a category to see its motivation.";
+         // Clear and hide the motivation input if it was visible
+         categoryMotivationInput.value = '';
+         categoryMotivationInput.style.display = 'none';
+         categoryMotivationToggle.classList.remove('active');
+     }
+
 
     // Initial render based on logged-in user
     renderTasks(currentCategory);
-    if (currentUser) renderReminderSchedule();
-    updateMotivationCard(); // Initial setup of the general motivation card
-    clearTaskMotivationDisplay(); // Ensure task motivation display is hidden initially
+    if (currentUser) {
+        renderReminderSchedule(); // Only render schedule if logged in
+        updateMotivationCard(); // Initial setup of the general motivation card
+        displayCategoryMotivation(currentCategory); // Display initial category motivation
+    } else {
+        clearTaskMotivationDisplay(); // Ensure task motivation display is hidden initially
+        clearCategoryMotivationDisplay(); // Ensure category motivation display is hidden initially
+    }
+
 
 })();
