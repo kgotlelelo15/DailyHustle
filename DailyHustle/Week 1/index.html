@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="script.js">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">DailyHustle</div>
+        <button id="theme-icon" class="theme-icon"><i class="fas fa-paint-brush"></i></button>
+    </header>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Tasks</h2>
+            <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search...">
+            </div>
+            <div class="sidebar-item" data-category="My Day"><i class="fas fa-sun"></i> My Day</div>
+            <div class="sidebar-item" data-category="Important"><i class="fas fa-star"></i> Important</div>
+            <div class="sidebar-item" data-category="Planned"><i class="fas fa-calendar-alt"></i> Planned</div>
+            <div class="sidebar-item" data-category="Assigned to me"><i class="fas fa-user"></i> Assigned to me</div>
+            <div class="sidebar-item" data-category="Tasks"><i class="fas fa-tasks"></i> Tasks</div>
+            <div class="sidebar-item" data-category="Getting started"><i class="fas fa-play-circle"></i> Getting started</div>
+            <div class="sidebar-item" data-category="Goals"><i class="fas fa-bullseye"></i> Goals</div>
+
+            <div class="task-footer">
+                <button id="new-list">+ New List</button>
+            </div>
+        </aside>
+        <main>
+            <section id="task-display">
+                <h1 id="category-title">My Day</h1>
+                <div class="task-container">
+                    <input type="text" id="task-input" placeholder="Add a new task...">
+                    <button id="add-task">Add Task</button>
+                </div>
+                <ul id="task-list"></ul>
+
+                <!-- Calendar and Reminder Section -->
+                <div class="reminder-container">
+                    <h2>Set a Reminder</h2>
+                    <input type="date" id="reminder-date">
+                    <input type="text" id="reminder-input" placeholder="Reminder text...">
+                    <button id="set-reminder">Set Reminder</button>
+                    <ul id="reminder-list"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Hidden Theme Selector -->
+    <div class="theme-selector" id="theme-selector">
+        <h3>Select Theme:</h3>
+        <div class="theme-grid">
+            <div class="theme-option" style="background-image: url('C:\Users\kgotl\Downloads\forest-image.jpeg');" data-theme="forest"></div>
+            <div class="theme-option" style="background-image: url('C:\Users\kgotl\Downloads\flower-image.jpeg');" data-theme="flowers"></div>
+            <div class="theme-option" style="background-image: url('C:\Users\kgotl\Downloads\house-image.jpeg');" data-theme="houses"></div>
+            <div class="theme-option" style="background-image: url('C:/Users/kgotl/Downloads/cartoons-image.jpeg');" data-theme="cartoon1"></div>
+            <div class="theme-option" style="background-color: #ffcccb;" data-theme="pink"></div>
+            <div class="theme-option" style="background-color: #ffe0b2;" data-theme="orange"></div>
+            <div class="theme-option" style="background-color: #ffeb3b;" data-theme="yellow"></div>
+            <div class="theme-option" style="background-color: #a5d6a7;" data-theme="green"></div>
+            <div class="theme-option" style="background-color: #64b5f6;" data-theme="blue"></div>
+            <div class="theme-option" style="background-color: #ba68c8;" data-theme="purple"></div>
+            <div class="theme-option" style="background-color: #ff7043;" data-theme="red"></div>
+            <div class="theme-option" style="background-image: url('images/sunset.jpg');" data-theme="sunset"></div>
+            <div class="theme-option" style="background-image: url('images/mountain.jpg');" data-theme="mountain"></div>
+            <div class="theme-option" style="background-image: url('images/cityscape.jpg');" data-theme="cityscape"></div>
+            <div class="theme-option" style="background-image: url('images/stars.jpg');" data-theme="stars"></div>
+           </div>
+        </div>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-copyright"></i> 2025 Daily Hustle. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

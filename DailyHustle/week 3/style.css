@@ -1,0 +1,217 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffcccb; /* Set the background color to pink */
+    color: black;
+}
+
+header {
+    background-color: #ff9999; /* Slightly darker pink */
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.theme-icon {
+    position: absolute;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    background-color: #ffe0e0; /* Light pink for sidebar */
+}
+
+.sidebar-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Task Styles */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.task-container {
+    margin: 20px 0;
+}
+
+#task-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#task-list li {
+    background: #e7f1ff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.remove-btn,
+.edit-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.reminder-icon {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #ff7043;
+    font-size: 20px;
+}
+
+.reminder-details {
+    display: none;
+    margin-top: 5px;
+}
+
+/* Completed task styles */
+.completed {
+    text-decoration: line-through;
+    color: grey;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Footer styles */
+footer {
+    background-color: #ffcccb; /* Light pink background */
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Authentication Modal Styles */
+#auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#auth-container {
+    background: hotpink; /* Background color for the modal */
+    padding: 20px;
+    border-radius: 5px;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Input Styles */
+.input-container {
+    position: relative;
+    margin: 10px 0; /* Space between input containers */
+}
+
+.input-container i {
+    position: absolute;
+    left: 10px; /* Align icons to the left */
+    top: 50%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    color: #ccc;
+    font-size: 16px; /* Ensure consistent icon size */
+}
+
+input {
+    display: block;
+    width: calc(100% - 40px); /* Ensure input fits with padding for icon */
+    padding: 10px 30px; /* Add padding for left-side icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Glow effect when focused */
+input:focus {
+    border-color: #ff66b2; /* Change border color to pink */
+    box-shadow: 0 0 5px #ff66b2; /* Change glow effect to pink */
+    outline: none; /* Remove default outline */
+}
+
+/* Notification Message Styles */
+#notification {
+    margin-top: 10px;
+    color: green; /* Change color for success messages */
+    font-weight: bold;
+}
+
+/* Registration Success Message Style */
+.notification-show {
+    display: block;
+}
+
+.notification-hide {
+    display: none;
+}

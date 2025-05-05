@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">DailyHustle</div>
+        <button id="theme-icon" class="theme-icon"><i class="fas fa-paint-brush"></i></button>
+    </header>
+
+    <main>
+        <div class="container">
+            <aside class="sidebar">
+                <h2>Tasks</h2>
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search...">
+                </div>
+                <div class="sidebar-item" data-category="My Day"><i class="fas fa-sun"></i> My Day</div>
+                <div class="sidebar-item" data-category="Important"><i class="fas fa-star"></i> Important</div>
+                <div class="sidebar-item" data-category="Planned"><i class="fas fa-calendar-alt"></i> Planned</div>
+                <div class="sidebar-item" data-category="Assigned to me"><i class="fas fa-user"></i> Assigned to me</div>
+                <div class="sidebar-item" data-category="Tasks"><i class="fas fa-tasks"></i> Tasks</div>
+                <div class="sidebar-item" data-category="Getting started"><i class="fas fa-play-circle"></i> Getting started</div>
+                <div class="sidebar-item" data-category="Goals"><i class="fas fa-bullseye"></i> Goals</div>
+                <div class="task-footer">
+                    <button id="new-list">+ New List</button>
+                </div>
+            </aside>
+
+            <main>
+                <!-- Flipping Card Section -->
+                <section class="flipping-card">
+                    <div class="card">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <h2>2025 IS ABOUT DISCIPLINE</h2>
+                                <p>Flip to see more...</p>
+                            </div>
+                            <div class="card-back">
+                                <p><strong>Decide what you want.</strong></p>
+                                <p><strong>Write it down.</strong></p>
+                                <p><strong>Make a plan.</strong></p>
+                                <p><strong>Work on it.</strong></p>
+                                <p><strong>Every. Single. Day.</strong></p>
+                                <p>Your competition isn’t other people.<br>
+                                It’s your procrastination. It’s the knowledge you neglect.<br>
+                                Compete against that.<br>
+                                Conquer yourself.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="task-display">
+                    <h1 id="category-title">My Day</h1>
+                    <div class="task-container">
+                        <input type="text" id="task-input" placeholder="Add a new task...">
+                        <input type="date" id="task-reminder-date">
+                        <input type="time" id="task-reminder-time">
+                        <input type="text" id="task-reminder-input" placeholder="Reminder text...">
+                        <button id="add-task">Add Task</button>
+                    </div>
+                    <ul id="task-list"></ul>
+                </section>
+            </main>
+        </div>
+    </main>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" style="display:none;">
+        <div id="auth-container">
+            <div id="login-form">
+                <h2>Login</h2>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username-login" placeholder="Username" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password-login" placeholder="Password" />
+                </div>
+                <button id="login-btn">Login</button>
+                <p>Don't have an account? <button id="show-register">Register</button></p>
+                <p><button id="show-reset">Forgot Password?</button></p>
+            </div>
+
+            <div id="register-form" style="display:none;">
+                <h2>Register</h2>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username-register" placeholder="Username" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email-register" placeholder="Email" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone-register" placeholder="Phone Number" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password-register" placeholder="Password" />
+                </div>
+                <button id="register-btn">Register</button>
+                <p>Already have an account? <button id="show-login">Login</button></p>
+            </div>
+
+            <div id="reset-form" style="display:none;">
+                <h2>Reset Password</h2>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email-reset" placeholder="Email" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone-reset" placeholder="Phone Number" />
+                </div>
+                <button id="reset-btn">Reset Password</button>
+                <p>Remembered your password? <button id="show-login-from-reset">Login</button></p>
+            </div>
+
+            <div id="notification" style="display:none;"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p><i class="fas fa-copyright"></i> 2025 Daily Hustle. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DailyHustle Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="login-container" id="login-component">
+        <h2 class="login-title">Login</h2>
+        <div class="login-input">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Email" id="username" required>
+        </div>
+        <div class="login-input">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" id="password" required>
+        </div>
+        <div class="remember-me">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember Me</label>
+        </div>
+        <a href="#" id="forgot-password-link" class="forgot-password">Forgot Password?</a>
+        <button id="login-button">Login</button>
+        <p class="register-link">
+            Don't have an account? <a href="#" id="register-link">Register</a>
+        </p>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="register-component" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-register-modal">×</span>
+            <h2>Register</h2>
+            <input type="text" id="register-email" placeholder="Email" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <button id="register-button">Register</button>
+        </div>
+    </div>
+
+    <!-- Reset Password Modal -->
+    <div id="reset-password-component" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-reset-password-modal">×</span>
+            <h2>Reset Password</h2>
+            <input type="email" id="reset-email" placeholder="Email" required>
+            <button id="reset-password-button">Reset Password</button>
+        </div>
+    </div>    
+
+    <div id="dashboard-container" style="display:none;">
+        <header>
+            <div class="logo">DailyHustle</div>
+            <button id="theme-icon" class="theme-icon"><i class="fas fa-paint-brush"></i></button>
+            <button id="logout-button">Logout</button>
+        </header>
+        <div class="container">
+            <aside class="sidebar">
+                <h2>Tasks</h2>
+                <div class="search-container">
+                    <input type="text" id="search-bar" placeholder="Search...">
+                </div>
+                <div class="sidebar-item" data-category="My Day"><i class="fas fa-sun"></i> My Day</div>
+                <div class="sidebar-item" data-category="Important"><i class="fas fa-star"></i> Important</div>
+                <div class="sidebar-item" data-category="Planned"><i class="fas fa-calendar-alt"></i> Planned</div>
+                <div class="sidebar-item" data-category="Assigned to me"><i class="fas fa-user"></i> Assigned to me</div>
+                <div class="sidebar-item" data-category="Tasks"><i class="fas fa-tasks"></i> Tasks</div>
+                <div class="task-footer">
+                    <button id="new-list">+ New List</button>
+                </div>
+            </aside>
+            <main>
+                <section id="task-display">
+                    <h1 id="category-title">My Day</h1>
+                    <div class="task-container">
+                        <input type="text" id="task-input" placeholder="Add a new task...">
+                        <button id="add-task">Add Task</button>
+                    </div>
+                    <ul id="task-list"></ul>
+                </section>
+            </main>
+        </div>
+
+        <footer>
+            <p><i class="fas fa-copyright"></i> 2025 Daily Hustle. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
