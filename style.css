@@ -1,0 +1,1001 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f8f8; /* Lighter background for a more professional look */
+    color: #333; /* Darker text color */
+}
+
+header {
+    background-color: #4CAF50; /* Professional green */
+    color: white; /* White text */
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.theme-icon {
+    position: absolute;
+    right: 50px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: white; /* White icons in header */
+}
+
+#logout-btn {
+    position: absolute;
+    right: 100px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: white; /* White icons in header */
+}
+
+/* Container */
+.container {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #ddd; /* Lighter border */
+    background-color: #e0f2f7; /* Light blue */
+    overflow-y: auto;
+    height: 100vh;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.sidebar h2 {
+    color: #0277bd; /* Darker blue for headings */
+    margin-top: 0;
+}
+
+.sidebar-item {
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s; /* Add color transition */
+    user-select: none;
+    border-radius: 5px;
+    display: flex; /* Align icon and text */
+    align-items: center;
+    color: #333; /* Default text color */
+}
+
+.sidebar-item i {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+
+.sidebar-item:hover,
+.sidebar-item.active {
+    background-color: #b3e5fc; /* Lighter blue on hover/active */
+    color: #01579b; /* Darker blue text on hover/active */
+}
+
+/* Task Styles */
+main.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+#task-display {
+    margin-top: 20px;
+}
+
+#category-title {
+    color: #0277bd; /* Match sidebar heading color */
+    margin-top: 0;
+}
+
+.task-container {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #fff; /* White background */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#task-input,
+#task-reminder-date,
+#task-reminder-time,
+#task-reminder-input,
+#task-motivation-input,
+#category-motivation-input { /* Include new input */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    flex-grow: 1; /* Allow inputs to grow */
+}
+
+#task-input {
+    flex-basis: 200px; /* Minimum width */
+}
+
+#task-reminder-date,
+#task-reminder-time {
+    flex-basis: 120px; /* Adjust width */
+    width: auto; /* Allow flex-basis to control width */
+}
+
+#task-reminder-input,
+#task-motivation-input,
+#category-motivation-input { /* Style new inputs */
+    flex-basis: 150px; /* Minimum width */
+}
+
+
+#add-task,
+#color-picker,
+#reminder-toggle,
+#motivation-toggle,
+#category-motivation-toggle { /* Include new toggle */
+    padding: 10px 15px; /* Adjust padding */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#add-task {
+    background-color: #f44336; /* Red */
+}
+
+#add-task:hover {
+    background-color: #d32f2f; /* Darker red */
+}
+
+#color-picker {
+    background-color: #03a9f4; /* Light blue */
+}
+
+#color-picker:hover {
+    background-color: #0288d1; /* Darker light blue */
+}
+
+#reminder-toggle {
+    background-color: #ff9800; /* Orange */
+}
+
+#reminder-toggle:hover {
+    background-color: #f57c00; /* Darker orange */
+}
+
+#motivation-toggle { /* Style new toggle */
+    background-color: #e91e63; /* Pink */
+}
+
+#motivation-toggle:hover {
+    background-color: #c2185b; /* Darker pink */
+}
+
+#category-motivation-toggle { /* Style new toggle */
+    background-color: #673ab7; /* Deep Purple */
+}
+
+#category-motivation-toggle:hover {
+    background-color: #512da8; /* Darker Deep Purple */
+}
+
+
+#reminder-settings {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%; /* Take full width */
+    margin-top: 10px; /* Space below toggle button */
+}
+
+
+#task-list {
+    width: 100%;
+    max-width: 700px; /* Slightly wider task list */
+    margin: 20px auto; /* Center and add margin */
+    list-style: none;
+    padding: 0;
+}
+
+#task-list li {
+    background: #ffffff;
+    margin: 10px 0;
+    padding: 15px; /* More padding */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    transition: background 0.3s, box-shadow 0.3s;
+    width: 100%;
+    min-height: 60px; /* Use min-height to allow content to expand */
+    box-sizing: border-box;
+    word-break: break-word;
+    border-left: 5px solid transparent; /* Add a border for status/category */
+    cursor: pointer; /* Indicate clickable */
+}
+
+#task-list li.completed {
+    text-decoration: line-through;
+    color: #888;
+    border-left-color: #4CAF50; /* Green border for completed */
+}
+
+#task-list li.active {
+    background-color: #fff9c4; /* Lighter yellow */
+    border-left-color: #fbc02d; /* Orange border for active */
+}
+
+#task-list li:hover {
+    background: #f5f5f5; /* Lighter hover background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger hover shadow */
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: 15px; /* More space */
+    flex-shrink: 0;
+}
+
+#task-list li .task-text {
+    flex: 1;
+    margin-left: 0; /* Remove left margin here */
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5; /* Improve readability */
+}
+
+.reminder-icon {
+    margin-left: 10px;
+    color: #ff9800; /* Orange color */
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.reminder-icon.hidden {
+    display: none;
+}
+
+
+/* Button Styles */
+.remove-btn,
+.edit-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #757575; /* Grey color */
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: color 0.3s;
+}
+
+.remove-btn:hover {
+    color: #f44336; /* Red on hover */
+}
+
+.edit-btn:hover {
+    color: #03a9f4; /* Light blue on hover */
+}
+
+/* Modal styles */
+#auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Changed background to fill the whole page */
+    background: linear-gradient(135deg, rgba(168, 224, 99, 0.9) 0%, rgba(252, 235, 10, 0.9) 100%); /* Added transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it covers the entire viewport */
+    width: 100%;
+    height: 100%;
+}
+
+#auth-container {
+    /* Keep the limepink background within the container */
+    background: linear-gradient(135deg, #a8e063 0%, #fceb0a 100%); /* Lime-yellow gradient for a "limepink" feel */
+    padding: 30px; /* More padding */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    width: 90%; /* Responsive width */
+    max-width: 450px; /* Max width */
+    height: auto; /* Auto height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    color: #333; /* Ensure text is readable on the new background */
+    /* Remove the background from the container itself if you want the full page gradient */
+    /* background: none; */
+}
+
+#auth-container h2 {
+    color: #0277bd; /* Match sidebar heading color */
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#auth-container button {
+    background-color: #4CAF50; /* Professional green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+#auth-container button:hover {
+    background-color: #388E3C; /* Darker green */
+}
+
+#auth-container p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+#auth-container p button {
+    background: none;
+    border: none;
+    color: #0277bd; /* Link color */
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
+#auth-container p button:hover {
+    color: #01579b;
+}
+
+
+/* Input container styles */
+.input-container {
+    position: relative;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-container i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9e9e9e; /* Greyer icon color */
+    font-size: 16px;
+}
+
+input {
+    display: block;
+    width: calc(100% - 40px);
+    padding: 10px 10px 10px 40px; /* Adjust padding for icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #03a9f4; /* Light blue focus */
+    box-shadow: 0 0 5px rgba(3, 169, 244, 0.5); /* Softer shadow */
+    outline: none;
+}
+
+/* Footer styles */
+footer {
+    background-color: #4CAF50; /* Match header green */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    user-select: none;
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Scrollbar styling for task list and sidebar */
+#task-list::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+#task-list::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #4CAF50; /* Match theme color */
+    border-radius: 4px;
+}
+
+#task-list::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track {
+    background-color: #e0e0e0; /* Lighter track */
+}
+
+body.dark-theme #task-list::-webkit-scrollbar-thumb,
+body.dark-theme .sidebar::-webkit-scrollbar-thumb {
+    background-color: #388E3C; /* Darker green in dark theme */
+}
+
+body.dark-theme #task-list::-webkit-scrollbar-track,
+body.dark-theme .sidebar::-webkit-scrollbar-track {
+    background-color: #444;
+}
+
+
+/* Dark theme */
+body.dark-theme {
+    background-color: #333;
+    color: #eee;
+}
+
+body.dark-theme header {
+    background-color: #212121; /* Darker grey */
+    color: #eee;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .theme-icon,
+body.dark-theme #logout-btn {
+    color: #eee;
+}
+
+
+body.dark-theme .sidebar {
+    background-color: #424242; /* Medium grey */
+    border-color: #616161;
+    color: #eee;
+    box-shadow: 2px 0 4px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .sidebar h2 {
+    color: #b3e5fc; /* Lighter blue */
+}
+
+body.dark-theme .sidebar-item {
+    color: #eee;
+}
+
+body.dark-theme .sidebar-item:hover,
+body.dark-theme .sidebar-item.active {
+    background-color: #616161;
+    color: #b3e5fc;
+}
+
+body.dark-theme #category-title {
+    color: #b3e5fc;
+}
+
+body.dark-theme .task-container {
+    background-color: #424242;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+
+body.dark-theme #task-list li {
+    background: #555;
+    color: #eee;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme #task-list li.completed {
+    color: #aaa;
+    border-left-color: #388E3C; /* Darker green */
+}
+
+body.dark-theme #task-list li.active {
+    background-color: #ffecb3; /* Lighter yellow */
+    border-left-color: #ffa000; /* Darker orange */
+    color: #333; /* Ensure text is readable */
+}
+
+body.dark-theme #task-list li:hover {
+    background: #616161;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+body.dark-theme .remove-btn,
+body.dark-theme .edit-btn {
+    color: #bbb;
+}
+
+body.dark-theme .remove-btn:hover {
+    color: #ef5350; /* Lighter red */
+}
+
+body.dark-theme .edit-btn:hover {
+    color: #4fc3f7; /* Lighter light blue */
+}
+
+body.dark-theme input {
+    background-color: #616161;
+    color: #eee;
+    border-color: #757575;
+}
+
+body.dark-theme input:focus {
+    border-color: #4fc3f7;
+    box-shadow: 0 0 5px rgba(79, 195, 247, 0.5);
+}
+
+body.dark-theme .input-container i {
+    color: #bdbdbd;
+}
+
+body.dark-theme #add-task {
+    background-color: #ef5350;
+}
+
+body.dark-theme #add-task:hover {
+    background-color: #e53935;
+}
+
+body.dark-theme #color-picker {
+    background-color: #4fc3f7;
+}
+
+body.dark-theme #color-picker:hover {
+    background-color: #29b6f6;
+}
+
+body.dark-theme #reminder-toggle {
+    background-color: #ffb74d; /* Lighter orange */
+}
+
+body.dark-theme #reminder-toggle:hover {
+    background-color: #ffa726; /* Darker lighter orange */
+}
+
+#motivation-toggle { /* Style new toggle */
+    background-color: #e91e63; /* Pink */
+}
+
+#motivation-toggle:hover {
+    background-color: #c2185b; /* Darker pink */
+}
+
+#category-motivation-toggle { /* Style new toggle */
+    background-color: #673ab7; /* Deep Purple */
+}
+
+#category-motivation-toggle:hover {
+    background-color: #512da8; /* Darker Deep Purple */
+}
+
+
+body.dark-theme #auth-modal {
+    /* Changed background for dark theme */
+    background: linear-gradient(135deg, rgba(139, 195, 74, 0.9) 0%, rgba(255, 238, 88, 0.9) 100%); /* Slightly different gradient for dark theme with transparency */
+}
+
+body.dark-theme #auth-container {
+     /* Keep the darker limepink background within the container */
+    background: linear-gradient(135deg, #8bc34a 0%, #ffee58 100%);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+    color: #333; /* Ensure text is readable */
+}
+
+
+body.dark-theme #auth-container h2 {
+    color: #0277bd; /* Keep same heading color for consistency */
+}
+
+body.dark-theme #auth-container button {
+    background-color: #388E3C;
+}
+
+body.dark-theme #auth-container button:hover {
+    background-color: #2E7D32;
+}
+
+body.dark-theme #auth-container p button {
+    color: #0277bd; /* Keep same link color */
+}
+
+body.dark-theme #auth-container p button:hover {
+    color: #01579b;
+}
+
+
+body.dark-theme footer {
+    background-color: #212121;
+    color: #eee;
+}
+
+body.dark-theme .reminder-icon {
+    color: #ffb74d; /* Lighter orange in dark theme */
+}
+
+
+/* Motivation Card Styles (General Card) */
+.motivation-card {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    background-color: #ffffff; /* White background */
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.8s ease, box-shadow 0.3s; /* Add box-shadow transition */
+    perspective: 1000px;
+    position: relative;
+    transform-style: preserve-3d;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.motivation-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Pink Glow Effect */
+.motivation-card:hover {
+    box-shadow: 0 0 20px 5px rgba(233, 30, 99, 0.5); /* Pink glow on hover */
+}
+
+body.dark-theme .motivation-card:hover {
+     box-shadow: 0 0 20px 5px rgba(240, 98, 146, 0.5); /* Lighter pink glow in dark theme */
+}
+
+
+.card-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card-content .front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background-color: #ffffff; /* Match card background */
+    color: #333; /* Text color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px; /* Match card border-radius */
+}
+
+.card-content .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background-color: #e0f2f7; /* Light blue background for the back */
+    color: #333; /* Text color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: pre-wrap;
+    word-break: break-word;
+    border-radius: 8px; /* Match card border-radius */
+}
+
+/* Styles for the content specifically on the front of the motivation card (General Card) */
+.card-content .front h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #0277bd; /* Match heading color */
+}
+
+.card-content .front p {
+    font-style: italic; /* Italicize the quote */
+    margin-bottom: 20px;
+    color: #555; /* Slightly lighter text for quote */
+}
+
+ .card-content .instructions {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 300px;
+    border-top: 1px solid #eee; /* Separator line */
+    padding-top: 15px;
+}
+
+.card-content .instructions p {
+    margin: 8px 0; /* More vertical spacing */
+    font-size: 14px;
+    color: #555;
+}
+
+.card-content .instructions i {
+    margin-right: 8px; /* More space */
+    color: #4CAF50; /* Professional green icon color */
+}
+
+
+/* Hide the edit button on the motivation card */
+#edit-motivation {
+    display: none;
+}
+
+/* Dark theme motivation card styles */
+body.dark-theme .motivation-card {
+    background-color: #424242;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.15);
+}
+
+body.dark-theme .card-content .front {
+    background-color: #424242;
+    color: #eee;
+}
+
+body.dark-theme .card-content .back {
+    background-color: #616161; /* Darker back in dark theme */
+    color: #eee;
+}
+
+body.dark-theme .card-content .front h2 {
+    color: #b3e5fc;
+}
+
+body.dark-theme .card-content .front p {
+    color: #bbb;
+}
+
+body.dark-theme .card-content .instructions {
+    border-top-color: #616161;
+}
+
+body.dark-theme .card-content .instructions p {
+    color: #bbb;
+}
+
+body.dark-theme .card-content .instructions i {
+    color: #81c784; /* Lighter green in dark theme */
+}
+
+
+/* Reminder Schedule Styles */
+.reminder-schedule {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .reminder-schedule {
+    background-color: #424242;
+    color: #eee;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+.reminder-schedule-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee; /* Separator line */
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-break: break-word;
+}
+
+body.dark-theme .reminder-schedule-item {
+    border-bottom-color: #616161;
+}
+
+
+.reminder-schedule-item:last-child {
+    border-bottom: none; /* No border on the last item */
+    margin-bottom: 0;
+}
+
+.reminder-schedule-item .task-info {
+    flex-grow: 1;
+    margin-right: 10px; /* Space between info and buttons */
+}
+
+.reminder-schedule-item .task-info strong {
+    display: block; /* Put task text on its own line */
+    margin-bottom: 5px;
+    color: #333;
+}
+
+body.dark-theme .reminder-schedule-item .task-info strong {
+    color: #eee;
+}
+
+
+.reminder-schedule-item .task-info span {
+    font-size: 0.9em;
+    color: #757575; /* Grey for date/time */
+}
+
+body.dark-theme .reminder-schedule-item .task-info span {
+    color: #bbb;
+}
+
+
+.reminder-schedule-actions {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0; /* Prevent actions from shrinking */
+}
+
+.reminder-schedule-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    color: #757575; /* Grey color */
+    padding: 5px;
+    border-radius: 4px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+body.dark-theme .reminder-schedule-actions button {
+    color: #bbb;
+}
+
+
+.reminder-schedule-actions button:hover {
+    color: #03a9f4; /* Light blue on hover */
+    background-color: #e0f2f7; /* Light background on hover */
+}
+
+body.dark-theme .reminder-schedule-actions button:hover {
+     color: #4fc3f7; /* Lighter light blue */
+     background-color: #616161; /* Darker background on hover */
+}
+
+
+/* Style for the schedule toggle button */
+.schedule-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #0277bd; /* Match theme color */
+    margin-right: 5px;
+    padding: 0;
+}
+
+body.dark-theme .schedule-toggle {
+    color: #b3e5fc;
+}
+
+.schedule-toggle:hover {
+    opacity: 0.8;
+}
+
+/* Task-Specific Motivation Display Styles */
+#task-motivation-display {
+    margin-top: 20px; /* Reduced margin to be closer to list */
+    margin-bottom: 20px; /* Add bottom margin */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.dark-theme #task-motivation-display {
+    background-color: #424242;
+    color: #eee;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+#task-motivation-display h2 {
+    color: #e91e63; /* Pink heading */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+body.dark-theme #task-motivation-display h2 {
+    color: #f06292; /* Lighter pink */
+}
+
+#current-task-motivation {
+    font-size: 1.1em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #555;
+}
+
+body.dark-theme #current-task-motivation {
+    color: #bbb;
+}
+
+/* Category-Specific Motivation Display Styles (New Section) */
+#category-motivation-display {
+    margin-top: 20px; /* Reduced margin to be closer to list */
+    margin-bottom: 20px; /* Add bottom margin */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.dark-theme #category-motivation-display {
+    background-color: #424242;
+    color: #eee;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+#category-motivation-display h2 {
+    color: #673ab7; /* Deep Purple heading */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+body.dark-theme #category-motivation-display h2 {
+    color: #9575cd; /* Lighter Deep Purple */
+}
+
+#current-category-motivation {
+    font-size: 1.1em;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #555;
+}
+
+body.dark-theme #current-category-motivation {
+    color: #bbb;
+}

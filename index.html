@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Daily Hustle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">  <!-- Link to the separate CSS file -->
+</head>
+<body>
+    <header>
+        <div class="logo">Daily Hustle</div>
+        <button id="theme-icon" class="theme-icon" title="Toggle Theme">
+            <i class="fas fa-paint-brush"></i>
+        </button>
+        <button id="logout-btn" class="theme-icon" title="Logout" style="display: none;"> <!-- Initially hidden -->
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar" role="navigation" aria-label="Task Categories">
+            <h2>Tasks</h2>
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Search tasks..." aria-label="Search tasks" />
+            </div>
+            <div class="sidebar-item active" data-category="My Day"><i class="fas fa-sun"></i> My Day</div>
+            <div class="sidebar-item" data-category="Important"><i class="fas fa-star"></i> Important</div>
+            <div class="sidebar-item" data-category="Planned"><i class="fas fa-calendar-alt"></i> Planned</div>
+            <div class="sidebar-item" data-category="Tasks"><i class="fas fa-tasks"></i> Tasks</div>
+            <div class="sidebar-item" data-category="Goals"><i class="fas fa-bullseye"></i> Goals</div>
+
+            <h2>
+                <button id="schedule-toggle" class="schedule-toggle" aria-label="Toggle Reminder Schedule">
+                    <i class="fas fa-calendar-check"></i> <!-- Changed icon -->
+                </button>
+                Reminder Schedule <!-- Changed heading -->
+            </h2>
+            <div class="reminder-schedule" id="reminder-schedule" style="display: none;">
+                <!-- Reminder tasks will be listed here -->
+            </div>
+
+             <!-- Category Motivation Section (New) -->
+             <h2>
+                 <button id="category-motivation-toggle" aria-label="Toggle Category Motivation Input">
+                     <i class="fas fa-lightbulb"></i> <!-- New icon -->
+                 </button>
+                 Category Motivation
+             </h2>
+             <input type="text" id="category-motivation-input" placeholder="Add motivation for this category..." aria-label="Category motivation message" style="display: none;" />
+             <div id="category-motivation-display" style="display: none;">
+                 <p id="current-category-motivation">Select a category to see its motivation.</p>
+             </div>
+
+        </aside>
+
+        <main class="content" role="main">
+            <section id="task-display">
+                <h1 id="category-title">My Day</h1>
+                <div class="task-container">
+                    <input type="text" id="task-input" placeholder="Add a new task..." aria-label="New task" />
+                    <button id="reminder-toggle" aria-label="Toggle reminder settings">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <div id="reminder-settings" style="display: none;">
+                        <input type="date" id="task-reminder-date" aria-label="Reminder date" min="" />
+                        <input type="time" id="task-reminder-time" aria-label="Reminder time" />
+                        <input type="text" id="task-reminder-input" placeholder="Reminder text..." aria-label="Reminder text" />
+                    </div>
+                     <button id="motivation-toggle" aria-label="Toggle Motivation Message Input"> <!-- New toggle -->
+                         <i class="fas fa-heart"></i> <!-- New icon -->
+                     </button>
+                    <input type="text" id="task-motivation-input" placeholder="Add task motivation message..." aria-label="Task motivation message" style="display: none;" /> <!-- New input -->
+                    <button id="add-task" aria-label="Add task">Add Task</button>
+                    <button id="color-picker" aria-label="Choose color" title="Pick a color">
+                        <i class="fas fa-palette"></i>
+                    </button>
+                </div>
+                <ul id="task-list" aria-live="polite" aria-label="Task list"></ul>
+
+                <!-- Motivation Card (General, not task-specific display) -->
+                <div class="motivation-card" id="motivation-card">
+                    <div class="card-content">
+                        <div class="front">
+                             <h2>2025 IS ABOUT DISCIPLINE</h2>
+                             <p>"Believe you can and you're halfway there." - Theodore Roosevelt</p>
+                             <div class="instructions">
+                                 <p><i class="fas fa-check-circle"></i> Decide what you want</p>
+                                 <p><i class="fas fa-pencil-alt"></i> Write it down</p>
+                                 <p><i class="fas fa-list-alt"></i> Make a plan</p>
+                                 <p><i class="fas fa-clock"></i> Work on it</p>
+                                 <p><i class="fas fa-calendar-alt"></i> Every. Single. Day</p>
+                             </div>
+                        </div>
+                        <div class="back">
+                            <!-- User's custom message will go here -->
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Task-Specific Motivation Display (New Section) -->
+                 <div id="task-motivation-display" style="display: none;">
+                     <h2>Motivation for Selected Task</h2>
+                     <p id="current-task-motivation">Select a task to see its motivation.</p>
+                 </div>
+
+            </section>
+        </main>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="auth-modal" style="display: flex;" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <div id="auth-container">
+            <div id="login-form">
+                <h2 id="auth-title">Login</h2>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username-login" placeholder="Username" aria-label="Username" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password-login" placeholder="Password" aria-label="Password" />
+                </div>
+                <button id="login-btn">Login</button>
+                <p>Don't have an account? <button id="show-register" type="button">Register</button></p>
+                <p><button id="show-reset" type="button">Forgot Password?</button></p>
+            </div>
+
+            <div id="register-form" style="display:none;">
+                <h2>Register</h2>
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username-register" placeholder="Username" aria-label="Username" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email-register" placeholder="Email" aria-label="Email" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone-register" placeholder="Phone Number" aria-label="Phone Number" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password-register" placeholder="Password" aria-label="Password" />
+                </div>
+                <button id="register-btn">Register</button>
+                <p>Already have an account? <button id="show-login" type="button">Login</button></p>
+            </div>
+
+            <div id="reset-form" style="display:none;">
+                <h2>Reset Password</h2>
+                <div class="input-container">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email-reset" placeholder="Email" aria-label="Email" />
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="phone-reset" placeholder="Phone Number" aria-label="Phone Number" />
+                </div>
+                <button id="reset-btn">Reset Password</button>
+                <p>Remembered your password? <button id="show-login-from-reset" type="button">Login</button></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Daily Hustle. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script> <!-- Link to the separate JavaScript file -->
+</body>
+</html>
